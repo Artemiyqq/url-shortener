@@ -1,0 +1,17 @@
+
+<div class="form-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h1 class="form-title">Login</h1>
+    <mat-form-field>
+      <mat-label>Login</mat-label>
+      <input matInput type="text" formControlName="login">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password">
+    </mat-form-field>
+    <button type="submit" mat-flat-button color="primary">Authorize</button>
+    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </form>
+</div>
+

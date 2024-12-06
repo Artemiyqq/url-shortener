@@ -1,0 +1,12 @@
+.vs/
+
+# Angular
+/UrlShortener.Client/node_modules
+/UrlShortener.Client/.vscode
+UrlShortener.Client/.angular/cache/*
+/UrlShortener.Client/obj
+
+# ASP.NET Core Web API
+/UrlShortener.Api/bin/Debug/net8.0
+/UrlShortener.Api/obj
+*.user

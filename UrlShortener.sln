@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35506.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.Api", "UrlShortener.Api\UrlShortener.Api.csproj", "{45C48585-A9FC-4E97-BFAD-FF1089C16578}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "UrlShortener.Client", "UrlShortener.Client\UrlShortener.Client.esproj", "{0C077C1E-DEDD-4F54-8A1A-D43B6F83A940}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45C48585-A9FC-4E97-BFAD-FF1089C16578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45C48585-A9FC-4E97-BFAD-FF1089C16578}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45C48585-A9FC-4E97-BFAD-FF1089C16578}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45C48585-A9FC-4E97-BFAD-FF1089C16578}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C077C1E-DEDD-4F54-8A1A-D43B6F83A940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C077C1E-DEDD-4F54-8A1A-D43B6F83A940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C077C1E-DEDD-4F54-8A1A-D43B6F83A940}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0C077C1E-DEDD-4F54-8A1A-D43B6F83A940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C077C1E-DEDD-4F54-8A1A-D43B6F83A940}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C077C1E-DEDD-4F54-8A1A-D43B6F83A940}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
