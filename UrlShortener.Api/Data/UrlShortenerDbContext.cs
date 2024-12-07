@@ -8,9 +8,11 @@ namespace UrlShortener.Api.Data
         public UrlShortenerDbContext(DbContextOptions<UrlShortenerDbContext> options) : base(options)
         {
             Accounts = Set<Account>();
+            ShortenedUrls = Set<ShortenedUrl>();
         }
 
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<ShortenedUrl> ShortenedUrls { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,10 +23,12 @@ namespace UrlShortener.Api.Data
                 .HasIndex(x => x.Login)
                 .IsUnique();
 
-            modelBuilder.Entity<Account>().HasData(
-                new Account { Id = 1, Login = "admin_paul_stone", Password = "Password123!", IsAdmin = true },
-                new Account { Id = 2, Login = "user_paul_stone", Password = "Password123!", IsAdmin = false }
-            );
+            modelBuilder.Entity<ShortenedUrl>()
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<ShortenedUrl>()
+                .HasIndex(su => su.LongUrl)
+                .IsUnique();
         }
     }
 }

@@ -1,20 +1,58 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using UrlShortener.Api.Data;
 using UrlShortener.Api.Models;
 using UrlShortener.Api.Services.Contracts;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace UrlShortener.Api.Services.Implementations
 {
-    public class AuthService(UrlShortenerDbContext context): IAuthService
+    public class AuthService(UrlShortenerDbContext context, ILogger<AuthService> logger) : IAuthService
     {
         private readonly UrlShortenerDbContext _context = context;
-        public async Task<int> Login(AccountDto accountDto)
-        {
-            Account? account = await _context.Accounts.FirstOrDefaultAsync(a => a.Login == accountDto.Login && 
-                                                                                a.Password == accountDto.Password);
-            if (account is null) return -1;
+        private readonly PasswordHasher<string> _passwordHasher = new();
+        private readonly ILogger<AuthService> _logger = logger;
 
-            return account.Id;
+        private const string InvalidCredentialsMessage = "Invalid credentials";
+
+        public async Task<Account> LoginAsync(AccountDto accountDto)
+        {
+            Account? account = await _context.Accounts.FirstOrDefaultAsync(a => a.Login == accountDto.Login);
+
+            if (account == null)
+            {
+                _logger.LogWarning("Login failed for user: {Login}", accountDto.Login);
+                throw new ArgumentException(InvalidCredentialsMessage);
+            }
+
+            PasswordVerificationResult verificationResult = _passwordHasher.VerifyHashedPassword(account.Name,
+                                                                                                 account.Password,
+                                                                                                 accountDto.Password);
+
+            if (verificationResult != PasswordVerificationResult.Success)
+            {
+                throw new ArgumentException(InvalidCredentialsMessage);
+            }
+
+            return account;
+        }
+
+        public async Task RegisterAsync(RegisterDto registerDto)
+        {
+            if (await _context.Accounts.AnyAsync(a => a.Login == registerDto.Login)) throw new ArgumentException("Login already exists");
+
+            Account account = new()
+            {
+                Name = registerDto.Name,
+                Login = registerDto.Login,
+                Password = _passwordHasher.HashPassword(registerDto.Name, registerDto.Password),
+            };
+
+            _context.Accounts.Add(account);
+            await _context.SaveChangesAsync();
+            return;
         }
     }
 }

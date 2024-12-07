@@ -1,0 +1,44 @@
+<div class="auth-form-container">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <h1 class="auth-form-title">Registration</h1>
+        <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput type="text" formControlName="name">
+            <mat-error *ngIf="registerForm.get('name')?.hasError('required')">Name is required</mat-error>
+            <mat-error *ngIf="registerForm.get('name')?.hasError('minlength')">Name must be at least 3
+                characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Login (e-mail)</mat-label>
+            <input matInput type="text" formControlName="login">
+            <mat-error *ngIf="registerForm.get('login')?.hasError('required')">Login is required</mat-error>
+            <mat-error *ngIf="registerForm.get('login')?.hasError('email')">Invalid email format</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+            <mat-error *ngIf="registerForm.get('password')?.hasError('required')">Password is required</mat-error>
+            <mat-error *ngIf="registerForm.get('password')?.hasError('minlength')">Password must be at least 8
+                characters</mat-error>
+            <mat-error *ngIf="registerForm.get('password')?.hasError('pattern')">
+                Password must include uppercase, lowercase and number
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field style="padding-bottom: 10px;">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" formControlName="confirmPassword">
+            <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('required')">Confirm Password is
+                required</mat-error>
+            <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('passwordMismatch')">Passwords do not
+                match</mat-error>
+        </mat-form-field>
+
+        <button type="submit">Register</button>
+        <p style="text-align: center;">Already have an account? <a routerLink="/login">Log in</a></p>
+    </form>
+</div>

@@ -5,6 +5,7 @@ namespace UrlShortener.Api.Services.Contracts
 {
     public interface IAuthService
     {
-        Task<int> Login(AccountDto accountDto);
+        Task<Account> LoginAsync(AccountDto accountDto);
+        Task RegisterAsync(RegisterDto registerDto);
     }
 }

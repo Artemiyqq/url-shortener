@@ -1,0 +1,24 @@
+<div class="auth-form-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h1 class="auth-form-title">Log In</h1>
+    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <mat-form-field>
+      <mat-label>Login(e-mail)</mat-label>
+      <input matInput type="text" formControlName="login">
+      <mat-error *ngIf="loginForm.get('login')?.hasError('required')">Login is required</mat-error>
+      <mat-error *ngIf="loginForm.get('login')?.hasError('email')">Invalid email format</mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="padding-bottom: 10px;">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password">
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
+      <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 8
+        characters</mat-error>
+    </mat-form-field>
+
+    <button type="submit">Authorize</button>
+    <p style="text-align: center;">Don't have an account? <a routerLink="/register">Register</a></p>
+  </form>
+</div>

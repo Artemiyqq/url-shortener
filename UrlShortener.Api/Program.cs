@@ -1,4 +1,7 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using UrlShortener.Api.Data;
 using UrlShortener.Api.Services.Contracts;
 using UrlShortener.Api.Services.Implementations;
@@ -19,17 +22,34 @@ internal class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
+        {
+            var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]!);
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                ValidAudience = builder.Configuration["Jwt:Audience"],
+                ClockSkew = TimeSpan.FromSeconds(5)
+            };
+        });
+
+        builder.Services.AddAuthorization();
+
         builder.Services.AddScoped<IAuthService, AuthService>();
+        builder.Services.AddScoped<IUrlShortenerService, UrlShortenerService>();
+        builder.Services.AddScoped<ITokenService, JwtTokenService>();
 
         var app = builder.Build();
 
         using (var scope = app.Services.CreateScope())
         {
-            var context  = scope.ServiceProvider.GetRequiredService<UrlShortenerDbContext>();
+            var context = scope.ServiceProvider.GetRequiredService<UrlShortenerDbContext>();
 
-            if (context .Database.GetPendingMigrations().Any())
+            if (context.Database.GetPendingMigrations().Any())
             {
-                context .Database.Migrate();
+                context.Database.Migrate();
             }
         }
 
