@@ -1,4 +1,5 @@
 .vs/
+.vscode/
 
 # Angular
 /UrlShortener.Client/node_modules
@@ -10,3 +11,5 @@ UrlShortener.Client/.angular/cache/*
 /UrlShortener.Api/bin/Debug/net8.0
 /UrlShortener.Api/obj
 *.user
+UrlShortener.Api/appsettings.json
+UrlShortener.Client/src/environments/environment.ts
