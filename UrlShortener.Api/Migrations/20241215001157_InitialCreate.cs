@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace UrlShortener.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,13 +34,19 @@ namespace UrlShortener.Api.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ShortUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LongUrl = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LongUrl = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2(0)", nullable: false)
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ShortenedUrls", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShortenedUrls_Accounts_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "Accounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -48,6 +54,11 @@ namespace UrlShortener.Api.Migrations
                 table: "Accounts",
                 column: "Login",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShortenedUrls_CreatedBy",
+                table: "ShortenedUrls",
+                column: "CreatedBy");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ShortenedUrls_LongUrl",
@@ -60,10 +71,10 @@ namespace UrlShortener.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Accounts");
+                name: "ShortenedUrls");
 
             migrationBuilder.DropTable(
-                name: "ShortenedUrls");
+                name: "Accounts");
         }
     }
 }

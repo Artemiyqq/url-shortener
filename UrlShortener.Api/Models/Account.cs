@@ -7,5 +7,7 @@ namespace UrlShortener.Api.Models
         public required string Login { get; set; }
         public required string Password { get; set; }
         public bool IsAdmin { get; set; }
+
+        public ICollection<ShortenedUrl> ShortenedUrls { get; set;} = [];
     }
 }

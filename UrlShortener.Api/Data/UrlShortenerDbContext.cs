@@ -29,6 +29,12 @@ namespace UrlShortener.Api.Data
             modelBuilder.Entity<ShortenedUrl>()
                 .HasIndex(su => su.LongUrl)
                 .IsUnique();
+            
+            modelBuilder.Entity<ShortenedUrl>()
+                .HasOne(su => su.Account)
+                .WithMany(a => a.ShortenedUrls)
+                .HasForeignKey(su => su.CreatedBy)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

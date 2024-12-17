@@ -69,7 +69,8 @@ namespace UrlShortener.Api.Migrations
 
                     b.Property<string>("LongUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(1500)
+                        .HasColumnType("nvarchar(1500)");
 
                     b.Property<string>("ShortUrl")
                         .IsRequired()
@@ -77,10 +78,28 @@ namespace UrlShortener.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("LongUrl")
                         .IsUnique();
 
                     b.ToTable("ShortenedUrls");
+                });
+
+            modelBuilder.Entity("UrlShortener.Api.Models.ShortenedUrl", b =>
+                {
+                    b.HasOne("UrlShortener.Api.Models.Account", "Account")
+                        .WithMany("ShortenedUrls")
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("UrlShortener.Api.Models.Account", b =>
+                {
+                    b.Navigation("ShortenedUrls");
                 });
 #pragma warning restore 612, 618
         }
