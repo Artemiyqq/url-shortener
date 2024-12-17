@@ -38,7 +38,7 @@ namespace UrlShortener.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest( new { message = ex.Message } );
             }
         }
 
@@ -60,7 +60,7 @@ namespace UrlShortener.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest( new { message = ex.Message });
             }
         }
 
@@ -83,7 +83,7 @@ namespace UrlShortener.Api.Controllers
                     ShortenedUrl url = await _urlShortenerService.GetUrlByIndexAsync(urlIndex);
 
                     int parsedAccountId = int.Parse(accountId);
-                    if (url.CreatedBy != parsedAccountId) return Forbid("You can only delete your own URLs");
+                    if (url.CreatedBy != parsedAccountId) return Forbid();
                 }
 
                 await _urlShortenerService.DeleteUrlByIndexAsync(urlIndex);
@@ -91,7 +91,7 @@ namespace UrlShortener.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { message = ex.Message });
             }
         }
     }
