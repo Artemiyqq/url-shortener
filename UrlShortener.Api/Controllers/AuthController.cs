@@ -46,6 +46,22 @@ namespace UrlShortener.Api.Controllers
             }
         }
 
+        [HttpPost("register-admin")]
+        public async Task<IActionResult> RegisterAdmin(RegisterDto registerDto)
+        {
+            if (!ModelState.IsValid) return BadRequest(new { message = "Invalid data" });
+
+            try
+            {
+                await _authService.RegisterAdminAsync(registerDto);
+                return Created();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
         [HttpPost("check-token")]
         public async Task<IActionResult> CheckToken(TokenDto tokenDto)
         {
