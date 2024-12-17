@@ -7,5 +7,6 @@ namespace UrlShortener.Api.Services.Contracts
     {
         Task<Account> LoginAsync(AccountDto accountDto);
         Task RegisterAsync(RegisterDto registerDto);
+        Task RegisterAdminAsync(RegisterDto registerDto);
     }
 }

@@ -1,7 +1,7 @@
 <div class="auth-form-container">
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <h1 class="auth-form-title">Log In</h1>
-    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+    <h1 class="text-4xl">Log In</h1>
+    <p class="text-red-600 text-lg" *ngIf="errorMessage">{{ errorMessage }}</p>
 
     <mat-form-field>
       <mat-label>Login(e-mail)</mat-label>
@@ -10,7 +10,7 @@
       <mat-error *ngIf="loginForm.get('login')?.hasError('email')">Invalid email format</mat-error>
     </mat-form-field>
 
-    <mat-form-field style="padding-bottom: 10px;">
+    <mat-form-field class="pb-2">
       <mat-label>Password</mat-label>
       <input matInput type="password" formControlName="password">
       <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
@@ -18,7 +18,7 @@
         characters</mat-error>
     </mat-form-field>
 
-    <button type="submit">Authorize</button>
-    <p style="text-align: center;">Don't have an account? <a routerLink="/register">Register</a></p>
+    <button class="py-2 font-bold w-full" type="submit">Authorize</button>
+    <p class="pt-2">Don't have an account? <a class="text-blue-600" routerLink="/register">Register</a></p>
   </form>
 </div>

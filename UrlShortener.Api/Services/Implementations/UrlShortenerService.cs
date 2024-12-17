@@ -24,7 +24,7 @@ namespace UrlShortener.Api.Services.Implementations
 
             ShortenedUrl? savedShortenedUrl = await _context.ShortenedUrls.FirstAsync(x => x.ShortUrl == shortUrl);
 
-            return new ShortenedUrlDto(savedShortenedUrl.Id, savedShortenedUrl.LongUrl, savedShortenedUrl.ShortUrl);
+            return new ShortenedUrlDto(savedShortenedUrl.Id, savedShortenedUrl.ShortUrl, savedShortenedUrl.LongUrl);
         }
 
         private static string GenerateShortUrlAsync()
@@ -62,7 +62,7 @@ namespace UrlShortener.Api.Services.Implementations
         public async Task<List<ShortenedUrlDto>> GetAllUrlsAsync()
         {
             List<ShortenedUrlDto> shortenedUrls = await _context.ShortenedUrls.Select(x =>
-                new ShortenedUrlDto(x.Id, x.LongUrl, x.ShortUrl)).ToListAsync();
+                new ShortenedUrlDto(x.Id, x.ShortUrl, x.LongUrl)).ToListAsync();
 
             return shortenedUrls;
         }

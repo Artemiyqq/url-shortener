@@ -7,11 +7,11 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-success-registration-dialog',
   imports: [MatDialogContent, MatDialogActions, MatButtonModule],
   template: `
-    <h2 mat-dialog-title style="margin-bottom: 0rem">Registration Successful!</h2>
-    <mat-dialog-content style="color: black">You can now log in or return to the home page.</mat-dialog-content>
+    <p mat-dialog-title class="mb-0 pt-3 text-center text-2xl">Registration Successful!</p>
+    <mat-dialog-content style="color: black; ">You can now log in or return to the home page.</mat-dialog-content>
     <mat-dialog-actions>
-      <button (click)="goToLogin()">Log In</button>
-      <button (click)="goToHome()">Home</button>
+      <button class="w-1/3" (click)="goToLogin()">Log In</button>
+      <button class="w-1/3" (click)="goToHome()">Home</button>
     </mat-dialog-actions>
   `,
   styles: [`

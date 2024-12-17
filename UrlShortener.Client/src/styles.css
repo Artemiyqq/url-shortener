@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
     margin: 0;
@@ -7,7 +11,6 @@ body {
 }
 
 button {
-    padding: 10px;
     background-color: #292929;
     color: #fff;
     border: none;

@@ -42,9 +42,9 @@ namespace UrlShortener.Api.Controllers
             }
         }
 
-        [HttpGet("shorten-url/{longUrl}")]
+        [HttpPost("shorten")]
         [Authorize(Roles = "Admin,User")]
-        public async Task<IActionResult> ShortenUrl(string longUrl)
+        public async Task<ActionResult<ShortenedUrlDto>> ShortenUrl(LongUrlDto longUrlDto)
         {
             string? accountId = User.FindFirst("id")?.Value;
             if (accountId == null)
@@ -55,7 +55,7 @@ namespace UrlShortener.Api.Controllers
             int parsedAccountId = int.Parse(accountId);
             try
             {
-                var shortenedUrl = await _urlShortenerService.ShortenUrlAsync(longUrl, parsedAccountId);
+                ShortenedUrlDto shortenedUrl = await _urlShortenerService.ShortenUrlAsync(longUrlDto.LongUrl, parsedAccountId);
                 return CreatedAtAction(nameof(GetByIndex), new { urlIndex = shortenedUrl.Id }, shortenedUrl);
             }
             catch (Exception ex)
@@ -75,7 +75,8 @@ namespace UrlShortener.Api.Controllers
                 {
                     return BadRequest("Unauthorized");
                 }
-                bool isAdmin = User.FindFirst("role")?.Value == "Admin";
+                var role = User.FindFirst("http://schemas.microsoft.com/ws/2008/06/identity/claims/role")?.Value;
+                bool isAdmin = role == "Admin";
 
                 if (!isAdmin)
                 {

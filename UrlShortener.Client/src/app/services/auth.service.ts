@@ -58,4 +58,9 @@ export class AuthService {
     this.isAuthenticated = result;
     return this.isAuthenticated;
   }
+
+  logout(): void {
+    localStorage.removeItem(this.tokenKey);
+    this.isAuthenticated = false;
+  }
 }

@@ -54,5 +54,15 @@ namespace UrlShortener.Api.Services.Implementations
             await _context.SaveChangesAsync();
             return;
         }
+
+        public async Task RegisterAdminAsync(RegisterDto registerDto)
+        {
+            await RegisterAsync(registerDto);
+            Account account = await _context.Accounts.FirstAsync(x => x.Login == registerDto.Login);
+
+            account.IsAdmin = true;
+            await _context.SaveChangesAsync();
+            return;
+        }
     }
 }

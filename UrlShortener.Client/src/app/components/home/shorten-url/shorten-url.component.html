@@ -1,17 +1,14 @@
-<div class="form-container">
-  <form [formGroup]="shortenUrlForm" style="width: 100%;" (ngSubmit)="onSubmit()">
-    <div class="input-group">
-      <mat-form-field appearance="fill" class="url-input">
-        <mat-label>URL</mat-label>
-        <input matInput type="url" formControlName="url" required>
-        <mat-error *ngIf="shortenUrlForm.get('url')?.hasError('required')">
-          URL is required
-        </mat-error>
-        <mat-error *ngIf="shortenUrlForm.get('url')?.hasError('pattern')">
-          Invalid URL format
-        </mat-error>
-      </mat-form-field>
-      <button type="submit">Shorten</button>
-    </div>
-  </form>
-</div>
+<form [formGroup]="shortenUrlForm" #formDirective="ngForm" class="flex justify-center items-center mb-10" 
+      (ngSubmit)="onSubmit(shortenUrlForm, formDirective)">
+  <mat-form-field appearance="fill" class="w-9/12 xl:w-5/6 bg-slate-50 rounded-lg">
+    <mat-label >URL</mat-label>
+    <input matInput type="url" formControlName="url" required>
+    <mat-error *ngIf="shortenUrlForm.get('url')?.hasError('required')">
+      URL is required
+    </mat-error>
+    <mat-error *ngIf="shortenUrlForm.get('url')?.hasError('pattern')">
+      Invalid URL format
+    </mat-error>
+  </mat-form-field>
+  <button class="ml-4 h-20 w-3/12 xl:w-1/6 text-xl lg:text-2xl" type="submit">Shorten</button>
+</form>
