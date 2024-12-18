@@ -57,7 +57,7 @@ namespace UrlShortener.Api.Services.Implementations
         {
             ShortenedUrl? shortenedUrl = await _context.ShortenedUrls.FirstOrDefaultAsync(x => x.ShortUrl == shortUrl);
 
-            if (shortenedUrl == null) throw new ArgumentException("Invalid short URL", nameof(shortUrl));
+            if (shortenedUrl == null) throw new ArgumentException("Invalid short URL");
 
             return shortenedUrl.LongUrl;
         }

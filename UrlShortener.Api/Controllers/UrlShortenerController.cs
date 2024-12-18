@@ -27,8 +27,22 @@ namespace UrlShortener.Api.Controllers
             }
         }
 
-        [HttpGet]
-        [AllowAnonymous]
+        [HttpGet("long-url/{shortUrl}"), AllowAnonymous]
+        public async Task<IActionResult> GetByShortUrl(string shortUrl)
+        {
+            try
+            {
+                string longUrl = await _urlShortenerService.GetLongUrlAsync(shortUrl);
+                LongUrlDto longUrlDto = new() { LongUrl = longUrl };
+                return Ok(longUrlDto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet, AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             try

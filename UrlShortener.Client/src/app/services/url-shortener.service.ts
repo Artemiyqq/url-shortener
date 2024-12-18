@@ -12,6 +12,23 @@ import { LongUrlDto } from '../models/long-url-dto.model';
 export class UrlShortenerService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
+  async getLongUrl(shortUrl: string) {
+    const longUrlDto = await firstValueFrom(
+      this.http.get<LongUrlDto>(`${environment.apiUrl}/url-shortener/long-url/${shortUrl}`)
+    );
+    return longUrlDto.longUrl;
+  }
+
+  async getAll(): Promise<ShortenedUrlDto[] | undefined> {
+    const responce = await firstValueFrom(
+      this.http.get<ShortenedUrlDto[]>(`${environment.apiUrl}/url-shortener`)
+    );
+    for (let i = 0; i < responce.length; i++) {
+      responce[i].shortUrl = `${environment.clientUrl}/${responce[i].shortUrl}`;
+    }
+    return responce;
+  }
+
   async shortenUrl(longUrl: string): Promise<ShortenedUrlDto> {
     const token = this.authService.getToken();
     const httpHeaders: HttpHeaders = new HttpHeaders({
@@ -24,18 +41,8 @@ export class UrlShortenerService {
 
     console.log(responce);
     
-    responce.shortUrl = `${environment.baseClientUrl}/${responce.shortUrl}`;
+    responce.shortUrl = `${environment.clientUrl}/${responce.shortUrl}`;
 
-    return responce;
-  }
-
-  async getAll(): Promise<ShortenedUrlDto[] | undefined> {
-    const responce = await firstValueFrom(
-      this.http.get<ShortenedUrlDto[]>(`${environment.apiUrl}/url-shortener`)
-    );
-    for (let i = 0; i < responce.length; i++) {
-      responce[i].shortUrl = `${environment.baseClientUrl}/${responce[i].shortUrl}`;
-    }
     return responce;
   }
 
