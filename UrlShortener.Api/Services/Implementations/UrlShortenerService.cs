@@ -14,10 +14,10 @@ namespace UrlShortener.Api.Services.Implementations
 
         public async Task<ShortenedUrlDto> ShortenUrlAsync(string longUrl, int accountId)
         {
-            if (longUrl.Length == 0) throw new ArgumentException("Url cannot be empty", nameof(longUrl));
+            if (longUrl.Length == 0) throw new ArgumentException("URL cannot be empty", nameof(longUrl));
 
             bool longUrlExists = await _context.ShortenedUrls.AnyAsync(x => x.LongUrl == longUrl);
-            if (longUrlExists) throw new ArgumentException("Url already exists");
+            if (longUrlExists) throw new ArgumentException("URL already exists");
 
             string shortUrl = GenerateShortUrlAsync();
             ShortenedUrl shortenedUrl = new(longUrl, shortUrl, accountId);

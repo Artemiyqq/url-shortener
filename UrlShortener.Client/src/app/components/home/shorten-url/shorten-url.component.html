@@ -1,3 +1,5 @@
+<app-error-toast *ngIf="errorMessage" [message]="errorMessage" />
+
 <form [formGroup]="shortenUrlForm" #formDirective="ngForm" class="flex justify-center items-center mb-10" 
       (ngSubmit)="onSubmit(shortenUrlForm, formDirective)">
   <mat-form-field appearance="fill" class="w-9/12 xl:w-5/6 bg-slate-50 rounded-lg">
