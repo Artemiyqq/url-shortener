@@ -1,0 +1,29 @@
+<div *ngIf="!authService.getIsAuthenticated()" class="flex items-center justify-center min-h-screen flex-col">
+    <div class="bg-white shadow-md rounded-lg p-4">
+        <h2 class="text-4xl text-red-600">You need to log in to view this page.</h2>
+    </div>
+    <div class="bg-white shadow-md rounded-lg p-4 mt-2 text-4xl">
+        <p>
+            <a routerLink="/login">Log in</a>
+            or 
+            <a routerLink="/register">Register</a>
+            and then Log In
+        </p>
+    </div>
+</div>
+
+<div *ngIf="errorMessage" class="flex items-center justify-center min-h-screen">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-4xl text-red-600">{{ errorMessage }}</h2>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="shortUrlInfoData" class="flex items-center justify-center min-h-screen">
+    <div class="bg-white shadow-md rounded-lg p-6 sm:max-lg:w-5/6">
+        <h2 class="text-4xl mb-3 font-bold text-center">Short URL Info</h2>
+        <p class="mb-2 text-xl"><strong>Created By:</strong> {{ shortUrlInfoData.createdBy }}</p>
+        <p class="mb-2 text-xl"><strong>Created Date:</strong> {{ shortUrlInfoData.createdDate }}</p>
+    </div>
+</div>

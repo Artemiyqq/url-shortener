@@ -53,6 +53,23 @@ namespace UrlShortener.Api.Services.Implementations
             return shortenedUrl;
         }
 
+        public async Task<ShortUrlInfoDto> GetUrlInfoDtoAsync(int id)
+        {
+            ShortenedUrl? shortenedUrl = await _context.ShortenedUrls
+                                                         .Include(x => x.Account)
+                                                        .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (shortenedUrl is null) throw new ArgumentException("Invalid URL id");
+
+            ShortUrlInfoDto shortUrlInfoDto = new()
+            {
+                CreatedBy = shortenedUrl.Account.Name,
+                CreatedDate = DateOnly.FromDateTime(shortenedUrl.CreatedDate),
+            };
+
+            return shortUrlInfoDto;
+        }
+
         public async Task<string> GetLongUrlAsync(string shortUrl)
         {
             ShortenedUrl? shortenedUrl = await _context.ShortenedUrls.FirstOrDefaultAsync(x => x.ShortUrl == shortUrl);

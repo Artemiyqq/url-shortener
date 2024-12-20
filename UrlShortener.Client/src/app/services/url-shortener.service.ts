@@ -5,6 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { AuthService } from './auth.service';
 import { ShortenedUrlDto } from '../models/shortened-url-dto.model';
 import { LongUrlDto } from '../models/long-url-dto.model';
+import { ShortUrlInfoDto } from '../models/short-url-info-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,17 @@ export class UrlShortenerService {
       this.http.get<LongUrlDto>(`${environment.apiUrl}/url-shortener/long-url/${shortUrl}`)
     );
     return longUrlDto.longUrl;
+  }
+
+  async getShortUrlInfoDto(id: string): Promise<ShortUrlInfoDto> {
+    const token = this.authService.getToken();
+    const httpHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    const shortUrlInfoDto = await firstValueFrom(
+      this.http.get<ShortUrlInfoDto>(`${environment.apiUrl}/url-shortener/${id}`, { headers: httpHeaders })
+    );
+    return shortUrlInfoDto;
   }
 
   async getAll(): Promise<ShortenedUrlDto[] | undefined> {

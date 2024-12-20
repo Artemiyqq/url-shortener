@@ -16,14 +16,11 @@ namespace UrlShortener.Api.Controllers
         [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> GetByIndex(int urlIndex)
         {
-            try
-            {
-                var shortenedUrl = await _urlShortenerService.GetUrlByIndexAsync(urlIndex);
-                return Ok(shortenedUrl);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
+            try {
+                ShortUrlInfoDto shortUrlInfoDto = await _urlShortenerService.GetUrlInfoDtoAsync(urlIndex);
+                return Ok(shortUrlInfoDto);
+            } catch (Exception ex) {
+                return BadRequest(new { message = ex.Message });
             }
         }
 

@@ -3,6 +3,7 @@ import { UrlShortenerService } from '../../../services/url-shortener.service';
 import { ShortenedUrlDto } from '../../../models/shortened-url-dto.model';
 import { CommonModule } from '@angular/common';
 import { ErrorToastComponent } from '../../error-toast/error-toast.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-urls-table',
@@ -15,7 +16,9 @@ export class UrlsTableComponent {
 
   errorMessage: string | null = null;
 
-  constructor(private urlShortenerService: UrlShortenerService) { }
+  constructor(private urlShortenerService: UrlShortenerService,
+              public router: Router,
+  ) { }
 
   async onDelete(id: number) {
     try {
@@ -29,5 +32,9 @@ export class UrlsTableComponent {
         }, 5000);
       }
     }
+  }
+
+  onShortUrlInfo(id: number) {
+    this.router.navigate(['short-url-info', id]);
   }
 }
