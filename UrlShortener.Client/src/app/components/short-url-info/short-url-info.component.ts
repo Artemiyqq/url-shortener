@@ -34,12 +34,12 @@ export class ShortUrlInfoComponent implements OnInit {
 
   initialChecks(id: string | null): boolean {
     if (!this.authService.getIsAuthenticated()) {
-      this.errorMessage = 'You are not authorized to view this page.';
+      this.errorMessage = 'You are not authorized to view this page';
       return false;
     }
 
     if (id === null) {
-      this.errorMessage = 'Invalid URL ID.';
+      this.errorMessage = 'Invalid URL ID';
       return false;
     }
 

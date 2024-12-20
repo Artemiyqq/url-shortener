@@ -7,7 +7,6 @@
             <a routerLink="/login">Log in</a>
             or 
             <a routerLink="/register">Register</a>
-            and then Log In
         </p>
     </div>
 </div>
@@ -21,9 +20,11 @@
 </div>
 
 <div *ngIf="shortUrlInfoData" class="flex items-center justify-center min-h-screen">
-    <div class="bg-white shadow-md rounded-lg p-6 sm:max-lg:w-5/6">
-        <h2 class="text-4xl mb-3 font-bold text-center">Short URL Info</h2>
-        <p class="mb-2 text-xl"><strong>Created By:</strong> {{ shortUrlInfoData.createdBy }}</p>
-        <p class="mb-2 text-xl"><strong>Created Date:</strong> {{ shortUrlInfoData.createdDate }}</p>
+    <div class="bg-white shadow-md rounded-lg p-6 text-xl sm:max-md:w-6/12 md:w-5/12 lg:w-4/12 2xl:w-3/12">
+        <h2 class="text-4xl mb-2 font-bold ">Short URL Info</h2>
+        <hr class="w-full mb-3">
+        <p class="mb-2"><strong>Created By:</strong> {{ shortUrlInfoData.createdBy }}</p>
+        <p class="mb-2"><strong>Created Date:</strong> {{ shortUrlInfoData.createdDate }}</p>
+        <p><strong>Usage Count:</strong> {{ shortUrlInfoData.usageCount }} </p>
     </div>
 </div>

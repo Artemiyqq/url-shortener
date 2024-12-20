@@ -4,5 +4,6 @@ namespace UrlShortener.Api.Models
     {
         public required string CreatedBy { get; set; }
         public required DateOnly CreatedDate { get; set; }
+        public required int UsageCount { get; set; } 
     }
 }

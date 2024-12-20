@@ -1,13 +1,13 @@
 <div class="container mx-auto flex flex-col items-center">
     <ng-container *ngIf="isAuthenticated">
         <app-shorten-url (urlShortened)="addNewUrl($event)" class="w-5/6 pt-10" />
-        <p class="text-2xl mb-3 bg-slate-50 rounded-lg p-3 text-center">
+        <p *ngIf="shortenedUrls.length !== 0" class="text-2xl mb-3 bg-slate-50 rounded-lg p-3 text-center">
             Would like to log in to a different account? <a (click)="logout()">Log Out</a>
         </p>
     </ng-container>
     <ng-container *ngIf="!isAuthenticated">
         <p class="text-2xl mb-3 bg-slate-50 rounded-lg p-3 text-center mt-5">
-            To access full functionality
+            To shorten URLs you need to
             <a routerLink="/login">Log In</a>
             or 
             <a routerLink="/register">Register</a>
@@ -18,4 +18,3 @@
       </div>      
     <app-urls-table [shortenedUrls]="shortenedUrls" (deleteShortUrl)="deleteShortUrl($event)" class="w-5/6" />
 </div>
-

@@ -65,6 +65,7 @@ namespace UrlShortener.Api.Services.Implementations
             {
                 CreatedBy = shortenedUrl.Account.Name,
                 CreatedDate = DateOnly.FromDateTime(shortenedUrl.CreatedDate),
+                UsageCount = shortenedUrl.UsageCount
             };
 
             return shortUrlInfoDto;
@@ -75,6 +76,9 @@ namespace UrlShortener.Api.Services.Implementations
             ShortenedUrl? shortenedUrl = await _context.ShortenedUrls.FirstOrDefaultAsync(x => x.ShortUrl == shortUrl);
 
             if (shortenedUrl == null) throw new ArgumentException("Invalid short URL");
+
+            shortenedUrl.UsageCount++;
+            await _context.SaveChangesAsync();
 
             return shortenedUrl.LongUrl;
         }

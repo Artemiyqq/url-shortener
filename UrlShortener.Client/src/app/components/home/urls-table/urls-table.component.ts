@@ -26,11 +26,18 @@ export class UrlsTableComponent {
       this.deleteShortUrl.emit(id);
     } catch (error: any) {
       if (error.status === 403){
-        this.errorMessage = 'You are not authorized to delete this URL.';
+        this.errorMessage = 'You are not authorized to delete this URL';
         setTimeout(() => {
           this.errorMessage = null;
         }, 5000);
       }
+      if (error.status === 401) 
+        {
+          this.errorMessage = 'To delete URLs you need to be authorized';
+          setTimeout(() => {
+            this.errorMessage = null;
+          }, 5000);
+        }
     }
   }
 
