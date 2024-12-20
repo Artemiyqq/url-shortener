@@ -11,5 +11,6 @@ namespace UrlShortener.Api.Models
         public int CreatedBy { get; set; } = createdBy;
         public Account Account { get; set; } = null!;
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+        public int UsageCount { get; set; } = 0;
     }
 }

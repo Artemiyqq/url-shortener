@@ -36,7 +36,8 @@ namespace UrlShortener.Api.Migrations
                     ShortUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LongUrl = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UsageCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

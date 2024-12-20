@@ -12,7 +12,7 @@ using UrlShortener.Api.Data;
 namespace UrlShortener.Api.Migrations
 {
     [DbContext(typeof(UrlShortenerDbContext))]
-    [Migration("20241215001157_InitialCreate")]
+    [Migration("20241220141953_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -78,6 +78,9 @@ namespace UrlShortener.Api.Migrations
                     b.Property<string>("ShortUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UsageCount")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
