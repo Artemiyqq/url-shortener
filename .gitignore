@@ -6,10 +6,16 @@
 /UrlShortener.Client/.vscode
 UrlShortener.Client/.angular/cache/*
 /UrlShortener.Client/obj
+UrlShortener.Client/src/environments/environment.ts
 
 # ASP.NET Core Web API
 /UrlShortener.Api/bin/Debug/net8.0
 /UrlShortener.Api/obj
 *.user
 UrlShortener.Api/appsettings.json
-UrlShortener.Client/src/environments/environment.ts
+
+# ASP.NET Core Web API
+/UrlShortener.Algorithm/bin/Debug/net8.0
+/UrlShortener.Algorithm/obj
+*.user
+UrlShortener.Algorithm/appsettings.json

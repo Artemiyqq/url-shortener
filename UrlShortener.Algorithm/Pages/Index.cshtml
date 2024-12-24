@@ -1,0 +1,52 @@
+@page
+@model IndexModel
+
+<h2>About</h2>
+
+<p>
+    This page displays and allows the admin to configure the settings of the URL shortener algorithm.
+</p>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <p style="color:red;">@Model.ErrorMessage</p>
+}
+
+<form method="post">
+    <fieldset>
+        <legend>Algorithm Settings</legend>
+
+        <div>
+            <label for="Length">Length:</label>
+            <input type="number" id="Length" asp-for="AlgorithmSettingsProperty.Length" min="3" max="10"
+                value="@Model.AlgorithmSettingsProperty.Length" />
+        </div>
+
+        <div>
+            <label>
+                <input type="checkbox" asp-for="AlgorithmSettingsProperty.IncludeDigits"
+                    checked="@Model.AlgorithmSettingsProperty.IncludeDigits" />
+                Include Digits
+            </label>
+        </div>
+
+        <div>
+            <label>
+                <input type="checkbox" asp-for="AlgorithmSettingsProperty.IncludeLowerLetters"
+                    checked="@Model.AlgorithmSettingsProperty.IncludeLowerLetters" /> Include Lowercase Letters
+            </label>
+        </div>
+
+        <div>
+            <label>
+                <input type="checkbox" asp-for="AlgorithmSettingsProperty.IncludeUpperLetters"
+                    checked="@Model.AlgorithmSettingsProperty.IncludeUpperLetters" /> Include Uppercase Letters
+            </label>
+        </div>
+    </fieldset>
+
+    @if (Model.IsAuthenticated)
+    {
+        <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+    }
+</form>
