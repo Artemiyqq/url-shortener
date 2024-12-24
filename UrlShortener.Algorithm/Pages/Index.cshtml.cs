@@ -37,7 +37,7 @@ namespace UrlShortener.Algorithm.Pages
             }
             catch (Exception ex)
             {
-                ErrorMessage = $"An error occurred: {ex.Message}";
+                ErrorMessage = $"An error occurred while trying to get algorithm settings";
             }
 
             return Page();
