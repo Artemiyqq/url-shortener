@@ -14,8 +14,12 @@ UrlShortener.Client/src/environments/environment.ts
 *.user
 UrlShortener.Api/appsettings.json
 
-# ASP.NET Core Web API
+# ASP.NET Razor Algorithm Page
 /UrlShortener.Algorithm/bin/Debug/net8.0
 /UrlShortener.Algorithm/obj
 *.user
 UrlShortener.Algorithm/appsettings.json
+
+# ASP.NET API NUnit Tests 
+/UrlShortener.Api.Tests/bin/Debug/net8.0
+/UrlShortener.Api.Tests/obj

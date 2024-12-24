@@ -10,6 +10,5 @@ namespace UrlShortener.Api.Services.Contracts
         Task<string> GetLongUrlAsync(string shortUrl);
         Task<List<ShortenedUrlDto>> GetAllUrlsAsync();
         Task DeleteUrlByIndexAsync(int index);
-        Task DeleteAllUrlsAsync();
     }
 }

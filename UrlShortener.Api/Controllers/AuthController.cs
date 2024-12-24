@@ -38,7 +38,8 @@ namespace UrlShortener.Api.Controllers
             try
             {
                 await _authService.RegisterAsync(registerDto);
-                return Created();
+                return NoContent();
+
             }
             catch (Exception ex)
             {

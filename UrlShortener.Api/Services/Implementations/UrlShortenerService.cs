@@ -77,7 +77,7 @@ namespace UrlShortener.Api.Services.Implementations
         {
             ShortenedUrl? shortenedUrl = await _context.ShortenedUrls.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (shortenedUrl == null) throw new ArgumentException("Invalid id", nameof(id));
+            if (shortenedUrl == null) throw new ArgumentException("Invalid URL id");
 
             return shortenedUrl;
         }
@@ -128,12 +128,6 @@ namespace UrlShortener.Api.Services.Implementations
 
             _context.ShortenedUrls.Remove(shortenedUrl);
             await _context.SaveChangesAsync();
-            return;
-        }
-
-        public async Task DeleteAllUrlsAsync()
-        {
-            await _context.ShortenedUrls.ExecuteDeleteAsync();
             return;
         }
     }
