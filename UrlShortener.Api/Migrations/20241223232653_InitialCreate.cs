@@ -28,6 +28,22 @@ namespace UrlShortener.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AlgorithmSettings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Length = table.Column<int>(type: "int", nullable: false),
+                    IncludeDigits = table.Column<bool>(type: "bit", nullable: false),
+                    IncludeLowerLetters = table.Column<bool>(type: "bit", nullable: false),
+                    IncludeUpperLetters = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AlgorithmSettings", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ShortenedUrls",
                 columns: table => new
                 {
@@ -50,6 +66,11 @@ namespace UrlShortener.Api.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AlgorithmSettings",
+                columns: new[] { "Id", "IncludeDigits", "IncludeLowerLetters", "IncludeUpperLetters", "Length" },
+                values: new object[] { 1, true, true, true, 6 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_Login",
                 table: "Accounts",
@@ -71,6 +92,9 @@ namespace UrlShortener.Api.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AlgorithmSettings");
+
             migrationBuilder.DropTable(
                 name: "ShortenedUrls");
 

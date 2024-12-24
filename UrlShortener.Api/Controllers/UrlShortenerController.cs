@@ -8,9 +8,10 @@ namespace UrlShortener.Api.Controllers
     [ApiController]
     [Route("api/url-shortener")]
     [Authorize]
-    public class UrlShortenerController(IUrlShortenerService urlShortenerService) : ControllerBase
+    public class UrlShortenerController(IUrlShortenerService urlShortenerService, ITokenService tokenService) : ControllerBase
     {
         private readonly IUrlShortenerService _urlShortenerService = urlShortenerService;
+        private readonly ITokenService _tokenService = tokenService;
 
         [HttpGet("{urlIndex}")]
         [Authorize(Roles = "Admin,User")]

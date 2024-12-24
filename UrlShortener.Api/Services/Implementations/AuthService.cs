@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using UrlShortener.Api.Data;
 using UrlShortener.Api.Models;
 using UrlShortener.Api.Services.Contracts;

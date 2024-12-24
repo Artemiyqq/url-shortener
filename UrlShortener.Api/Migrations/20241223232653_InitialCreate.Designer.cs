@@ -12,7 +12,7 @@ using UrlShortener.Api.Data;
 namespace UrlShortener.Api.Migrations
 {
     [DbContext(typeof(UrlShortenerDbContext))]
-    [Migration("20241220141953_InitialCreate")]
+    [Migration("20241223232653_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -54,6 +54,41 @@ namespace UrlShortener.Api.Migrations
                         .IsUnique();
 
                     b.ToTable("Accounts");
+                });
+
+            modelBuilder.Entity("UrlShortener.Api.Models.AlgorithmSettings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IncludeDigits")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IncludeLowerLetters")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IncludeUpperLetters")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Length")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AlgorithmSettings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IncludeDigits = true,
+                            IncludeLowerLetters = true,
+                            IncludeUpperLetters = true,
+                            Length = 6
+                        });
                 });
 
             modelBuilder.Entity("UrlShortener.Api.Models.ShortenedUrl", b =>

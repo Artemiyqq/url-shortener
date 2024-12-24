@@ -1,4 +1,3 @@
-using System.Collections;
 using UrlShortener.Api.Models;
 
 namespace UrlShortener.Api.Services.Contracts

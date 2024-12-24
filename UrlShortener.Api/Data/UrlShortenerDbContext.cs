@@ -9,10 +9,12 @@ namespace UrlShortener.Api.Data
         {
             Accounts = Set<Account>();
             ShortenedUrls = Set<ShortenedUrl>();
+            AlgorithmSettings = Set<AlgorithmSettings>();
         }
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<ShortenedUrl> ShortenedUrls { get; set; }
+        public DbSet<AlgorithmSettings> AlgorithmSettings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,6 +37,17 @@ namespace UrlShortener.Api.Data
                 .WithMany(a => a.ShortenedUrls)
                 .HasForeignKey(su => su.CreatedBy)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<AlgorithmSettings>().HasData(
+                new AlgorithmSettings
+                {
+                    Id = 1,
+                    Length = 6,
+                    IncludeDigits = true,
+                    IncludeLowerLetters = true,
+                    IncludeUpperLetters = true
+                }
+            );
         }
     }
 }

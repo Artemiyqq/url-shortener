@@ -40,6 +40,7 @@ internal class Program
         builder.Services.AddScoped<IAuthService, AuthService>();
         builder.Services.AddScoped<IUrlShortenerService, UrlShortenerService>();
         builder.Services.AddScoped<ITokenService, JwtTokenService>();
+        builder.Services.AddScoped<IAlgorithmSettingsService, AlgorithmSettingsService>();
 
         var app = builder.Build();
 

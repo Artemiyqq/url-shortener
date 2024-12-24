@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using UrlShortener.Api.Models;
 
 namespace UrlShortener.Api.Services.Contracts
@@ -8,5 +7,6 @@ namespace UrlShortener.Api.Services.Contracts
         Task<Account> LoginAsync(AccountDto accountDto);
         Task RegisterAsync(RegisterDto registerDto);
         Task RegisterAdminAsync(RegisterDto registerDto);
+        
     }
 }
