@@ -26,7 +26,7 @@ internal class Program
             app.UseHsts();
         }
 
-        app.UseHttpsRedirection();
+        app.Urls.Add("http://*:7047");
         app.UseStaticFiles();
 
         app.UseRouting();

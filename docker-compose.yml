@@ -1,0 +1,52 @@
+name: url-shortener
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: urlshortener_sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrong@Password
+    ports:
+      - "1433:1433"
+    networks:
+      - url-shortener-network
+
+  api:
+    build:
+      context: .
+      dockerfile: UrlShortener.Api/Dockerfile
+    container_name: api
+    depends_on:
+      - sqlserver
+    ports:
+      - "7006:7006"
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=UrlShortenerDb;User Id=sa;Password=YourStrong@Password;TrustServerCertificate=true
+    networks:
+      - url-shortener-network
+
+  client:
+    build:
+      context: .
+      dockerfile: UrlShortener.Client/Dockerfile
+    container_name: client
+    ports:
+      - "5173:80"
+    networks:
+      - url-shortener-network
+  
+  razor:
+    build:
+      context: .
+      dockerfile: ./UrlShortener.Algorithm/Dockerfile
+    ports:
+      - "7047:7047"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - api
+    networks:
+      - url-shortener-network
+
+networks:
+  url-shortener-network:

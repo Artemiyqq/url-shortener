@@ -55,11 +55,10 @@ internal class Program
         }
 
         // Configure the HTTP request pipeline.
-        if (app.Environment.IsDevelopment())
-        {
+        
             app.UseSwagger();
             app.UseSwaggerUI();
-        }
+        
 
         app.UseCors(options => options
            .SetIsOriginAllowed(x => _ = true)
@@ -67,7 +66,7 @@ internal class Program
            .AllowAnyHeader()
            .AllowCredentials());
 
-        app.UseHttpsRedirection();
+        app.Urls.Add("http://*:7006");
 
         app.UseAuthorization();
         app.UseAuthorization();

@@ -1,5 +1,5 @@
 export const environment = {
-    production: false,
+    production: true,
     apiUrl: 'http://localhost:7006/api',
-    clientUrl: 'http://localhost:4200'
+    clientUrl: 'http://url-shortener-client:5173'
 };

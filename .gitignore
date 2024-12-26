@@ -4,9 +4,9 @@
 # Angular
 /UrlShortener.Client/node_modules
 /UrlShortener.Client/.vscode
+/UrlShortener.Client/dist
 UrlShortener.Client/.angular/cache/*
 /UrlShortener.Client/obj
-UrlShortener.Client/src/environments/environment.ts
 
 # ASP.NET Core Web API
 /UrlShortener.Api/bin/Debug/net8.0
